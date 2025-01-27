@@ -56,9 +56,9 @@ def main(changed_file_path):
         except Exception as e:
             print(f"Error processing {file}: {e}")
             
-    if __name__ == "__main__":
-        parser = argparse.ArgumentParser(description="Generate test cases for modified files.")
-        parser.add_argument("--changed-files", required=True, help="Path to the file containing the list of changed files.")
-        args = parser.parse_args()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate test cases for modified files.")
+    parser.add_argument("--changed-files", required=True, help="Path to the file containing the list of changed files.")
+    args = parser.parse_args()
 
-        main(args.changed_files)
+    main(args.changed_files)
