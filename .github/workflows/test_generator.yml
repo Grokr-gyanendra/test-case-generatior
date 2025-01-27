@@ -30,8 +30,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install google-generativeai
-          pip install python-dotenv
+          pip install google-generativeai python-dotenv pytest
 
       - name: Generate Test Cases
         env:
@@ -39,15 +38,11 @@ jobs:
         run: |
           python testcase_generator.py --changed-files changed_files.txt
 
+      - name: Debug Test Directory
+        run: |
+          echo "Contents of tests/ directory:"
+          ls -R tests/
+
       - name: Run Tests
         run: |
-          pip install pytest
           pytest tests/
-
-      - name: Commit Test Cases
-        run: |
-          git config user.name "Grokr-gyanendra"
-          git config user.email "gyanendra.shukla@datagrokr.co"
-          git add tests/
-          git commit -m "Automated test case generation" || echo "No changes to commit."
-          git push

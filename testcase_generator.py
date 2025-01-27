@@ -32,9 +32,9 @@ def generate_test_cases(source_code, file_name):
     return response_generatior(headers, payload)
 
 def save_test_cases(file_name, test_code):
-    test_file_path = Path(f"tests/test_{file_name.replace('/', '_')}")
+    test_file_path = Path(f"tests/test_{file_name.replace('/', '_')}.py")
     os.makedirs(test_file_path.parent, exist_ok=True)
-    with open(test_file_path.with_suffix('.py'), 'w') as file:
+    with open(test_file_path, 'w') as file:
         file.write(test_code)
         
 def main(changed_file_path):
@@ -50,6 +50,7 @@ def main(changed_file_path):
             print(f"Processing {file}...")
             code = extract_code(file)
             test_case = generate_test_cases(code, file)
+            print("Generated test case:", test_case)
             save_test_cases(file.replace('/', '_').replace('.py', ''), test_case)
             print(f"Test generated for {file}")
         except Exception as e:
