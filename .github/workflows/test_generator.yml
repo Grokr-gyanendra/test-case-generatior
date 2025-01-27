@@ -28,6 +28,11 @@ jobs:
           fi
           git diff --name-only origin/master HEAD > changed_files.txt
 
+      - name: Install Dependencies
+        run: |
+          pip install google-generativeai
+          pip install python-dotenv
+
       - name: Generate Test Cases
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
